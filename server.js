@@ -139,7 +139,7 @@ app.get("/htmlDemo", (req, res) => {
 
 // Route to display the form for adding a new student
 app.get("/students/add", (req, res) => {
-    res.render('addStudent');
+    res.render('addstudent');
 });
 
 
