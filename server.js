@@ -21,6 +21,8 @@ const app = express();
 
 // Middleware to serve static files from the views directory
 app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, "views")));
+
 
 // Configure express-handlebars
 app.engine('.hbs', exphbs.engine({
