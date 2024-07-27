@@ -53,24 +53,6 @@ function getAllStudents() {
   });
 }
 
-// Function to get all TAs
-function getTAs() {
-  return new Promise((resolve, reject) => {
-    if (!dataCollection) {
-      reject('Data collection not initialized');
-      return;
-    }
-    // Filter students to get only TAs
-    let tas = dataCollection.students.filter(student => student.TA); 
-    if (tas.length === 0) {
-      // Reject if there are no TAs
-      reject('No results returned'); 
-      return;
-    }
-    resolve(tas); // Resolve with the list of TAs
-  });
-}
-
 // Function to get all courses
 function getCourses() {
   return new Promise((resolve, reject) => {
@@ -186,4 +168,4 @@ function updateStudent(studentData) {
 }
 
 // Export the functions for use in other modules
-module.exports = { initialize, getAllStudents, getTAs, getCourses, getStudentsByCourse, getStudentByNum, addStudent, getCourseById, updateStudent };
+module.exports = { initialize, getAllStudents, getCourses, getStudentsByCourse, getStudentByNum, addStudent, getCourseById, updateStudent };
