@@ -72,6 +72,15 @@ app.get("/students", async (req, res) => {
     }
 });
 
+// GET /tas route
+app.get("/tas", async (req, res) => {
+    try {
+        const data = await collegeData.getTAs();
+        res.render("tas", { tas: data });
+    } catch (err) {
+        errorHandler(res, "Error retrieving TAs");
+    }
+});
 
 // GET /courses route
 app.get("/courses", async (req, res) => {
