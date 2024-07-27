@@ -58,61 +58,70 @@ app.use((req, res, next) => {
 app.use(express.urlencoded({ extended: true }));
 
 // GET /students route
-app.get("/students", async (req, res) => {
-    try {
-        if (req.query.course) {
-            const data = await collegeData.getStudentsByCourse(parseInt(req.query.course));
-            res.render("students", { students: data });
-        } else {
-            const data = await collegeData.getAllStudents();
-            res.render("students", { students: data });
-        }
-    } catch (err) {
-        errorHandler(res, "Error retrieving students");
+app.get("/students", (req, res) => {
+    if (req.query.course) {
+        collegeData.getStudentsByCourse(parseInt(req.query.course))
+            .then(data => {
+                res.render("students", { students: data });
+            })
+            .catch(err => {
+                errorHandler(res, "Error retrieving students");
+            });
+    } else {
+        collegeData.getAllStudents()
+            .then(data => {
+                res.render("students", { students: data });
+            })
+            .catch(err => {
+                errorHandler(res, "Error retrieving students");
+            });
     }
 });
 
-
-
 // GET /courses route
-app.get("/courses", async (req, res) => {
-    try {
-        const data = await collegeData.getCourses();
-        res.render("courses", { courses: data });
-    } catch (err) {
-        res.render("courses", { message: "No results returned" });
-    }
+app.get("/courses", (req, res) => {
+    collegeData.getCourses()
+        .then(data => {
+            res.render("courses", { courses: data });
+        })
+        .catch(err => {
+            res.render("courses", { message: "No results returned" });
+        });
 });
 
 // GET /course/:id route
-app.get("/course/:id", async (req, res) => {
-    try {
-        const data = await collegeData.getCourseById(parseInt(req.params.id));
-        if (data) {
-            res.render("course", { course: data });
-        } else {
-            res.status(404).render("course", { message: "Course not found" });
-        }
-    } catch (err) {
-        res.status(500).render("course", { message: "Error retrieving course" });
-    }
+app.get("/course/:id", (req, res) => {
+    collegeData.getCourseById(parseInt(req.params.id))
+        .then(data => {
+            if (data) {
+                res.render("course", { course: data });
+            } else {
+                res.status(404).render("course", { message: "Course not found" });
+            }
+        })
+        .catch(err => {
+            res.status(500).render("course", { message: "Error retrieving course" });
+        });
 });
 
 // GET /student/:num route
-app.get("/student/:num", async (req, res) => {
-    try {
-        const studentData = await collegeData.getStudentByNum(parseInt(req.params.num));
-        const coursesData = await collegeData.getCourses();
-        
-        if (studentData) {
-            res.render("student", { student: studentData, courses: coursesData });
-        } else {
-            res.status(404).render("student", { message: "Student not found" });
-        }
-    } catch (err) {
-        res.status(500).render("student", { message: "Error retrieving student" });
-    }
+app.get("/student/:num", (req, res) => {
+    const studentPromise = collegeData.getStudentByNum(parseInt(req.params.num));
+    const coursesPromise = collegeData.getCourses();
+
+    Promise.all([studentPromise, coursesPromise])
+        .then(([studentData, coursesData]) => {
+            if (studentData) {
+                res.render("student", { student: studentData, courses: coursesData });
+            } else {
+                res.status(404).render("student", { message: "Student not found" });
+            }
+        })
+        .catch(err => {
+            res.status(500).render("student", { message: "Error retrieving student" });
+        });
 });
+
 
 // GET / route
 app.get("/", (req, res) => {
