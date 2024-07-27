@@ -163,7 +163,7 @@ function updateStudent(studentData) {
       ...studentData,
       TA: studentData.TA === 'on' // Handle the TA checkbox
     };
-    resolve(dataCollection.students[index]); // Resolve the promise with the updated student data
+    resolve(studentData); // Resolve the promise with the updated student data
   });
 }
 

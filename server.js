@@ -147,17 +147,19 @@ app.post("/students/add", (req, res) => {
         });
 });
 
-app.post("/student/update", async (req, res) => {
-    try {
-        // Call the updateStudent function with the form data
-        await collegeData.updateStudent(req.body);
-        // Redirect to the students list after updating
-        res.redirect("/students");
-    } catch (err) {
-        console.error('Error updating student:', err);
-        res.status(500).send('Error updating student');
-    }
+//Student update
+app.post("/student/update", (req, res) => {
+    collegeData.updateStudent(req.body)
+        .then(() => {
+            // Redirect to the students list after updating
+            res.redirect("/students");
+        })
+        .catch((err) => {
+            console.error('Error updating student:', err);
+            res.status(500).send('Error updating student');
+        });
 });
+
 
 
 // 404 route
