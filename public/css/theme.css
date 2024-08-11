@@ -1,0 +1,106 @@
+/* Importing Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Ga+Maamli&display=swap');
+
+/* General Styles */
+body,
+html {
+    font-family: 'Ga Maamli', sans-serif;
+    overflow: auto;
+    background: linear-gradient(to right, #62d3b5, #66ffeb);
+    /* Light blue-green gradient background */
+}
+
+/* Navigation Bar */
+.navbar {
+    background-color: #8effff;
+    /* Dark teal background color */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* Soft shadow */
+}
+
+/* Navigation Brand */
+.navbar-brand {
+    font-family: 'Ga Maamli', sans-serif;
+    color: #ffffff;
+    /* White text color */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    /* Text shadow */
+    font-weight: 700;
+    font-size: 1.5rem;
+}
+
+/* Navigation Links */
+.nav-link {
+    font-family: 'Ga Maamli', sans-serif;
+    color: #b2dfdb;
+    /* Light teal text color */
+    font-weight: 400;
+}
+
+.nav-link:hover {
+    color: #ffffff;
+    /* Hover white text color */
+}
+
+/* Primary Button */
+.btn-primary {
+    background-color: #004d40;
+    /* Dark green background color */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* Box shadow */
+    color: #ffffff;
+    /* White text color */
+    border: none;
+    font-family: 'Ga Maamli', sans-serif;
+    font-weight: 700;
+    padding: 10px 20px;
+    border-radius: 4px;
+}
+
+.btn-primary:hover {
+    background-color: #00695c;
+    /* Hover medium green background color */
+}
+
+/* Table Rows (Odd) */
+table tr:nth-child(odd) td {
+    background-color: #b2dfdb;
+    /* Light teal background color for odd rows */
+}
+
+/* Heading Elements */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Ga Maamli', sans-serif;
+    color: #004d40;
+    /* Dark green text color */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    /* Text shadow */
+}
+
+/* Anchor Elements */
+a {
+    color: #004d40;
+    /* Dark green text color */
+}
+
+a:hover {
+    color: #00796b;
+    /* Hover dark teal text color */
+}
+
+/* Fieldset Legends */
+legend {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-family: 'Ga Maamli', sans-serif;
+    color: #004d40;
+    /* Dark green text color */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    /* Text shadow */
+    font-weight: 700;
+}
