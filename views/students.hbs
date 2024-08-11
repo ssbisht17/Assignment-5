@@ -5,37 +5,48 @@
         <h2>Students</h2>
         <hr />
 
+        <!-- Add Student Button -->
+        <div class="text-right mb-3">
+            <a href="/students/add" class="btn btn-primary">Add Student</a>
+        </div>
+
         <div class="table-responsive">
-            <table class="table">
+            <table class="table table-striped table-bordered">
                 <thead>
                     <tr>
-                        <th>Student Num</th>
+                        <th>Student Number</th>
                         <th>Full Name</th>
                         <th>Email</th>
                         <th>Address</th>
                         <th>Status</th>
-                        <th>Course ID</th>
+                        <th>Course</th>
                     </tr>
                 </thead>
                 <tbody>
                     {{#each students}}
-                        <tr>
-                            <td>{{this.studentNum}}</td>
-                            <td><a href="/student/{{this.studentNum}}">{{this.firstName}} {{this.lastName}}</a></td>
-                            <td><a href="mailto:{{this.email}}">{{this.email}}</a></td>
-                            <td>{{this.address}}, {{this.addressCity}}, {{this.addressProvince}}</td>
-                            <td>{{this.status}}</td>
-                            <td><a href="/students?course={{this.course}}">{{this.course}}</a></td>
-                        </tr>
+                    <tr>
+                        <td>{{this.studentNum}}</td>
+                        <td><a href="/student/{{this.studentNum}}">{{this.firstName}} {{this.lastName}}</a></td>
+                        <td><a href="mailto:{{this.email}}">{{this.email}}</a></td>
+                        <td>{{this.address}}, {{this.addressCity}}, {{this.addressProvince}}</td>
+                        <td>{{this.status}}</td>
+                        <td>
+                            {{#if this.courseName}}
+                            <a href="/students?course={{this.courseId}}">{{this.courseName}}</a>
+                            {{else}}
+                            {{this.courseId}}
+                            {{/if}}
+                        </td>
+                    </tr>
                     {{/each}}
                 </tbody>
             </table>
         </div>
 
-        {{#unless students}}
-            <div class="col-md-12 text-center">
-                <strong>{{message}}</strong>
-            </div>
+        {{#unless students.length}}
+        <div class="col-md-12 text-center">
+            <strong>NO RESULT</strong>
+        </div>
         {{/unless}}
     </div>
 </div>
